@@ -1,5 +1,5 @@
 .container{
-    width: 50vw;
+    min-width: 50vw;
     height: 40vh;
     padding: 0.2em;
     

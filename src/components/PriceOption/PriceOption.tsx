@@ -2,29 +2,24 @@
 
 import { IoWallet } from "react-icons/io5";
 import BarChart from "../barChart/barChart";
-import PieChart from "../pieChart/pieChart"; 
+import PieChart from "../pieChart/pieChart";
 import styles from "./priceOption.module.css";
 
-import React, { useEffect } from "react";
+import React from "react";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
-import { useRouter, useSearchParams } from "next/navigation";
+import { redirect, useRouter, useSearchParams } from "next/navigation";
 
-export default function PriceOption({ data } : any) {
+export default function PriceOption({ data }: any) {
   const params = useSearchParams();
   const router = useRouter();
   const opcao = params.get("q");
 
-  useEffect(() => {
-    
-    if (opcao && (opcao != "bar" && opcao != "pie")) {
-      router.replace("?q=bar");
-    } 
-      
-    
-  }, []);
+  if (opcao != "bar" && opcao != "pie") {
+    redirect("?q=bar");
+  }
 
   const handleOptionClick = (option: any) => {
-    router.push(`?q=${option}`);
+    router.push(`/?q=${option}`);
   };
 
   return (
@@ -35,13 +30,17 @@ export default function PriceOption({ data } : any) {
         {opcao === "pie" && <PieChart data={data} />}
         <div className={styles.containerbtn}>
           <button
-            className={`${styles.optionbtn} ${opcao === "bar" && styles.active}`}
+            className={`${styles.optionbtn} ${
+              opcao === "bar" && styles.active
+            }`}
             onClick={() => handleOptionClick("bar")}
           >
             <IoWallet />
           </button>
           <button
-            className={`${styles.optionbtn} ${opcao === "pie" && styles.active}`}
+            className={`${styles.optionbtn} ${
+              opcao === "pie" && styles.active
+            }`}
             onClick={() => handleOptionClick("pie")}
           >
             <RiMoneyDollarCircleFill />

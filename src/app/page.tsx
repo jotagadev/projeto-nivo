@@ -4,7 +4,7 @@ import PriceOption from "@/components/PriceOption/PriceOption";
 
 import { fetchPrice } from "@/actions/main";
 
-export default async function App() {
+export default async function Page() {
   const ETH = await fetchPrice("ETH");
   const BTC = await fetchPrice("BTC");
   const LTC = await fetchPrice("LTC");
