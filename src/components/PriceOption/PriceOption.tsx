@@ -5,7 +5,7 @@ import BarChart from "../barChart/barChart";
 import PieChart from "../pieChart/pieChart"; 
 import styles from "./priceOption.module.css";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -14,9 +14,14 @@ export default function PriceOption({ data } : any) {
   const router = useRouter();
   const opcao = params.get("q");
 
-  if (opcao !== "bar" && opcao !== "pie") {
-    router.replace("?q=bar");
-  }
+  useEffect(() => {
+    
+    if (opcao && (opcao != "bar" && opcao != "pie")) {
+      router.replace("?q=bar");
+    } 
+      
+    
+  }, []);
 
   const handleOptionClick = (option: any) => {
     router.push(`?q=${option}`);
